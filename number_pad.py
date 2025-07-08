@@ -10,8 +10,6 @@ from PySide6.QtGui import QFont
 
 class NumberPad(QWidget):
     def __init__(self) -> None:
-        super().__init__()
-
         FONT = QFont("Arial", 18, QFont.Weight.Bold)
 
         WINDOW_WIDTH = 300
@@ -19,6 +17,8 @@ class NumberPad(QWidget):
 
         BUTTON_WIDTH = 60
         BUTTON_HEIGHT = 60
+
+        super().__init__()
 
         self.setWindowTitle("Numbers Grid")
         self.setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT)
@@ -45,16 +45,18 @@ class NumberPad(QWidget):
             button.setStyleSheet(
                 """
                 QPushButton {
-                    background-color: #3498db;
+                    background-color: #3820d0;
                     color: white;
-                    border: 2px solid #2980b9;
+                    font-size: 18px;
+                    font-family: "Comic Sans MS";
+                    border: 4px solid #d020b0;
                     border-radius: 10px;
                 }
                 QPushButton:hover {
-                    background-color: #5dade2;
+                    background-color: #FF5733;
                 }
                 QPushButton:pressed {
-                    background-color: #2e86c1;
+                    background-color: #20d02a;
                 }
                 """
             )
