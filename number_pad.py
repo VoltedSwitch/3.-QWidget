@@ -112,5 +112,5 @@ class NumberPad(QWidget):
             else self.click_display(text)
         )
 
-    def click_display(self, text: str | int) -> None:
+    def click_display(self, text: str | int):
         self.display.setText(self.display.text() + str(text))
