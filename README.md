@@ -1,6 +1,6 @@
 # 🔢 NumberPad
 
-This is a simple, stylish number pad GUI built with **PySide6** framework in Python. It features clickable number buttons (0-9) and a 🗑️ delete button, with a display area that shows the numbers as they are clicked.
+This is a simple, stylish number pad GUI built with **PySide6** framework in **Python**. It features clickable number buttons (0-9) and a 🗑️ delete button, with a display area that shows the numbers as they are clicked.
 
 Perfect for beginners learning PySide6 and how to use layouts, buttons, signals, and custom styles!
 
