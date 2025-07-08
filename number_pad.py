@@ -5,13 +5,23 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QGridLayout,
 )
+from PySide6.QtGui import QFont
 
 
 class NumberPad(QWidget):
     def __init__(self) -> None:
         super().__init__()
+
+        FONT = QFont("Arial", 18, QFont.Weight.Bold)
+
+        WINDOW_WIDTH = 300
+        WINDOW_HEIGHT = 300
+
+        BUTTON_WIDTH = 60
+        BUTTON_HEIGHT = 60
+
         self.setWindowTitle("Numbers Grid")
-        self.setFixedSize(300, 300)
+        self.setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT)
 
         layout = QGridLayout()
         labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -30,7 +40,26 @@ class NumberPad(QWidget):
 
         for label, (row, column) in zip(labels, positions):
             button = QPushButton(label)
+            button.setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT)
+            button.setFont(FONT)
+            button.setStyleSheet(
+                """
+                QPushButton {
+                    background-color: #3498db;
+                    color: white;
+                    border: 2px solid #2980b9;
+                    border-radius: 10px;
+                }
+                QPushButton:hover {
+                    background-color: #5dade2;
+                }
+                QPushButton:pressed {
+                    background-color: #2e86c1;
+                }
+                """
+            )
             button.clicked.connect(lambda _, text=label: self.click_print(text))
+
             layout.addWidget(button, row, column)
 
         self.setLayout(layout)
