@@ -17,7 +17,7 @@ class NumberPad(QWidget):
         WINDOW_WIDTH = 300
         WINDOW_HEIGHT = 400
 
-        BUTTON_WIDTH = 60
+        BUTTON_WIDTH = 80
         BUTTON_HEIGHT = 60
 
         BOTTOM_ROW = 3
