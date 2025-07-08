@@ -1,10 +1,10 @@
 from PySide6.QtWidgets import QApplication
-from rockwidget import RockWidget
+from number_pad import NumberPad
 
 import sys
 
 app = QApplication(sys.argv)
-window = RockWidget()
+window = NumberPad()
 window.show()
 
 app.exec()
