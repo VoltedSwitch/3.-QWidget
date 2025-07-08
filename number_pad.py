@@ -105,7 +105,7 @@ class NumberPad(QWidget):
         main_layout.addLayout(grid_layout)
         self.setLayout(main_layout)
 
-    def make_click_handler(self, label):
+    def make_click_handler(self, label: str | int):
         return lambda _, text=label: (
             self.display.setText(self.display.text()[:-1])
             if text == "🗑️"
