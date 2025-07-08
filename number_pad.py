@@ -105,9 +105,12 @@ class NumberPad(QWidget):
         main_layout.addLayout(grid_layout)
         self.setLayout(main_layout)
 
-    def make_click_handler(self, text):
-        return lambda _: self.click_print(text)
+    def make_click_handler(self, label):
+        return lambda _, text=label: (
+            self.display.setText(self.display.text()[:-1])
+            if text == "🗑️"
+            else self.click_display(text)
+        )
 
-    def click_print(self, text: str | int) -> None:
-        current = self.display.text()
-        self.display.setText(current + str(text))
+    def click_display(self, text: str | int) -> None:
+        self.display.setText(self.display.text() + str(text))
