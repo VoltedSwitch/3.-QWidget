@@ -4,13 +4,14 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QVBoxLayout,
     QGridLayout,
+    QLineEdit,
 )
 from PySide6.QtGui import QFont
 
 
 class NumberPad(QWidget):
     def __init__(self) -> None:
-        # Define
+        # Set up
         FONT = QFont("Arial", 18, QFont.Weight.Bold)
 
         WINDOW_WIDTH = 300
@@ -24,7 +25,10 @@ class NumberPad(QWidget):
         ROW_SPAN = 1
         COLUMN_SPAN = 3
 
-        STYLE = """
+        DISPLAY_HEIGHT = 40
+
+        DISPLAY_STYLE = "font-size: 20px;"
+        BUTTON_STYLE = """
             QPushButton {
                 background-color: #3820d0;
                 color: white;
@@ -43,9 +47,16 @@ class NumberPad(QWidget):
 
         super().__init__()
 
+        self.display = QLineEdit()
+
+        self.display.setReadOnly(True)  # Prevents typing it into manually
+        self.display.setFixedHeight(DISPLAY_HEIGHT)
+        self.display.setStyleSheet(DISPLAY_STYLE)
+
         self.setWindowTitle("Numbers Grid")
         self.setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT)
 
+        main_layout = QVBoxLayout()
         grid_layout = QGridLayout()
         bottom_row_layout = QHBoxLayout()
 
@@ -64,37 +75,39 @@ class NumberPad(QWidget):
             (2, 2),
         ]
 
-        # Create main buttons
+        # Create main grid buttons
         for main_button_label, (row, column) in zip(
             main_button_labels, main_button_positions
         ):
             main_button = QPushButton(str(main_button_label))
             main_button.setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT)
             main_button.setFont(FONT)
-            main_button.setStyleSheet(STYLE)
+            main_button.setStyleSheet(BUTTON_STYLE)
             main_button.clicked.connect(self.make_click_handler(main_button_label))
 
             grid_layout.addWidget(main_button, row, column)
 
-        # Create bottom buttons
+        # Create bottom grid buttons
         for bottom_button_label in bottom_button_labels:
             bottom_button = QPushButton(bottom_button_label)
             bottom_button.setFixedSize(BUTTON_WIDTH, BUTTON_HEIGHT)
             bottom_button.setFont(FONT)
-            bottom_button.setStyleSheet(STYLE)
+            bottom_button.setStyleSheet(BUTTON_STYLE)
             bottom_button.clicked.connect(self.make_click_handler(bottom_button_label))
+
             bottom_row_layout.addWidget(bottom_button)
 
         # Add the button_row_layout to the grid layout at the bottom row, spanning all columns
         grid_layout.addLayout(
             bottom_row_layout, BOTTOM_ROW, FIRST_LEFT_COLUMN, ROW_SPAN, COLUMN_SPAN
         )
-
-        self.setLayout(grid_layout)
+        main_layout.addWidget(self.display)
+        main_layout.addLayout(grid_layout)
+        self.setLayout(main_layout)
 
     def make_click_handler(self, text):
         return lambda _: self.click_print(text)
 
-    @staticmethod
-    def click_print(text: str | int) -> None:
-        print(text, end="", flush=True)
+    def click_print(self, text: str | int) -> None:
+        current = self.display.text()
+        self.display.setText(current + str(text))
