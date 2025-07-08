@@ -11,11 +11,11 @@ from PySide6.QtGui import QFont
 
 class NumberPad(QWidget):
     def __init__(self) -> None:
-        # Set up
+        # Setup
         FONT = QFont("Arial", 18, QFont.Weight.Bold)
 
         WINDOW_WIDTH = 300
-        WINDOW_HEIGHT = 300
+        WINDOW_HEIGHT = 400
 
         BUTTON_WIDTH = 60
         BUTTON_HEIGHT = 60
